@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff5f9e, #ffc3a0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', Arial, sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.2);
+    padding: 35px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(255,0,100,0.4);
+}
+
+h1 {
+    color: white;
+    font-size: 2.2em;
+}
+
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin: 10px;
+    transition: 0.3s;
+}
+
+#yes {
+    background: #ff2e63;
+    color: white;
+}
+
+#yes:hover {
+    transform: scale(1.1);
+}
+
+#no {
+    background: #444;
+    color: white;
+    position: absolute;
+}
+
+#celebration {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, #ff8fab, #ff2e63);
+    color: white;
+    text-align: center;
+    padding-top: 25vh;
+}
+
+#celebration h2 {
+    font-size: 2.6em;
+}
+
+.heart {
+    position: fixed;
+    font-size: 24px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>Will you be my Valentine? 💘</h1>
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 😢</button>
+</div>
+
+<div id="celebration">
+    <h2>🎉 Happy Valentine’s Day bby 💖</h2>
+    <h3>I love you soooo much 🥰</h3>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const main = document.getElementById("main");
+const celebration = document.getElementById("celebration");
+
+// Move NO button
+function moveNo() {
+    noBtn.style.left = Math.random() * 90 + "%";
+    noBtn.style.top = Math.random() * 90 + "%";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+
+// NO button click message 😈
+noBtn.addEventListener("click", () => {
+    alert(
+        "❌ You cannot choose this option!\n\n" +
+        "👉 You must choose YES 💖\n\n" +
+        "😎 I love youuuuu\n" +
+        "🔪 you must love me"
+    );
+    moveNo();
+});
+
+// YES button celebration 💖
+yesBtn.addEventListener("click", () => {
+    main.style.display = "none";
+    celebration.style.display = "block";
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💖🦋";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 30 + 20 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 5000);
+    }, 300);
+});
+</script>
+
+</body>
+</html>
