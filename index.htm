@@ -2,225 +2,153 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💖</title>
+<title>Will You Be My Valentine?</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    background:linear-gradient(135deg,#ff5fa2,#ffd1e8);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:'Poppins',Arial,sans-serif;
-    overflow:hidden;
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
+
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background: url("https://images.unsplash.com/photo-1518199266791-5375a83190b7") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Elegant Page Border */
-.page-border{
-    position:fixed;
-    inset:12px;
-    border:4px solid rgba(255,255,255,0.85);
-    border-radius:30px;
-    box-shadow:0 0 35px rgba(255,0,120,0.6);
-    pointer-events:none;
-}
-.page-border::after{
-    content:"";
-    position:absolute;
-    inset:10px;
-    border:3px dotted rgba(255,255,255,0.6);
-    border-radius:24px;
+.container {
+    background: rgba(255, 255, 255, 0.85);
+    border: 8px double #ff4d6d;
+    border-radius: 25px;
+    padding: 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255,0,80,0.4);
+    position: relative;
+    overflow: hidden;
 }
 
-/* Main Card */
-.card{
-    text-align:center;
-    background:rgba(255,255,255,0.25);
-    padding:40px;
-    border-radius:25px;
-    backdrop-filter:blur(12px);
-    box-shadow:0 0 40px rgba(255,0,120,0.4);
-    max-width:90%;
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    color: #ff1f5a;
+    margin-bottom: 20px;
 }
 
-h1{color:white;font-size:2.4em}
-
-button{
-    padding:14px 34px;
-    font-size:18px;
-    border:none;
-    border-radius:50px;
-    cursor:pointer;
-    margin:12px;
-    transition:.3s;
+.buttons {
+    margin-top: 20px;
 }
 
-#yes{background:#ff2e63;color:white}
-#yes:hover{transform:scale(1.15)}
-
-#no{background:#333;color:white;position:absolute}
-
-/* NO message */
-#noMsg{
-    display:none;
-    color:white;
-    margin-top:18px;
-    font-size:1.1em;
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
 }
 
-/* Celebration Page */
-#celebration{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle,#ff9acb,#ff2e63);
-    color:white;
-    text-align:center;
-    padding:7vh 6vw;
-    overflow:auto;
+#yesBtn {
+    background: linear-gradient(45deg, #ff4d6d, #ff8fa3);
+    color: white;
 }
 
-/* Celebration Borders */
-.celebrate-border{
-    position:fixed;
-    inset:16px;
-    border:5px solid rgba(255,255,255,0.9);
-    border-radius:34px;
-    box-shadow:0 0 45px rgba(255,255,255,0.8);
-    pointer-events:none;
-}
-.celebrate-border::after{
-    content:"💖 💕 💖 💕 💖";
-    position:absolute;
-    inset:12px;
-    border:3px dashed rgba(255,255,255,0.7);
-    border-radius:26px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    opacity:.45;
+#noBtn {
+    background: #ddd;
+    color: #333;
 }
 
-.love-text{
-    max-width:800px;
-    margin:auto;
-    font-size:1.2em;
-    line-height:1.7;
+#message {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #444;
 }
 
-/* Floating hearts & butterflies */
-.float{
-    position:fixed;
-    animation:floatUp 4.5s linear forwards;
-}
-@keyframes floatUp{
-    from{transform:translateY(100vh);opacity:1}
-    to{transform:translateY(-10vh);opacity:0}
+.love-text {
+    display: none;
+    margin-top: 20px;
+    color: #ff1f5a;
 }
 
-/* Crackers */
-.spark{
-    position:fixed;
-    width:6px;
-    height:6px;
-    background:white;
-    border-radius:50%;
-    animation:spark 1s ease-out forwards;
+.love-text p {
+    margin: 10px 0;
 }
-@keyframes spark{
-    from{transform:scale(1);opacity:1}
-    to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}
+
+.heart, .butterfly, .cracker {
+    position: fixed;
+    font-size: 24px;
+    animation: float 4s linear forwards;
+    pointer-events: none;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-600px);
+        opacity: 0;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="page-border"></div>
+<div class="container">
+    <h1>Will you be my Valentine? 💖</h1>
 
-<div class="card" id="main">
-    <h1>Will you be my Valentine? 💘</h1>
-    <button id="yes">Yes 💖</button>
-    <button id="no">No 😢</button>
-
-    <div id="noMsg">
-        ❌ You cannot choose this option<br>
-        👉 You must choose <b>YES</b> 💖<br>
-        😎 I love youuuuu<br>
-        you must love me 😏
+    <div class="buttons">
+        <button id="yesBtn">Yes 💕</button>
+        <button id="noBtn">No 🙄</button>
     </div>
-</div>
 
-<div id="celebration">
-    <div class="celebrate-border"></div>
+    <div id="message"></div>
 
-    <h2>🎉 Happy Valentine’s Day, my love 💖</h2>
-
-    <div class="love-text">
-        <p>
-            From the moment you entered my life, everything changed.
-            You became my happiness, my calm, and my favorite feeling.
-        </p>
-        <p>
-            Loving you feels effortless and beautiful.
-            You make my heart feel at home every single day.
-        </p>
-        <p>
-            Today and always, I choose you.
-            I love you endlessly 💕🦋
-        </p>
+    <div class="love-text" id="loveText">
+        <p>Happy Valentine’s Day bby ❤️</p>
+        <p>You make my world brighter, my days happier, and my heart fuller 💞</p>
+        <p>I promise to stand by you, laugh with you, and love you endlessly 🥰</p>
+        <p>I love youuuuu 😎❤️</p>
     </div>
 </div>
 
 <script>
-const noBtn=document.getElementById("no");
-const yesBtn=document.getElementById("yes");
-const noMsg=document.getElementById("noMsg");
-const main=document.getElementById("main");
-const celebration=document.getElementById("celebration");
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const message = document.getElementById("message");
+const loveText = document.getElementById("loveText");
 
-// NO button
-function moveNo(){
-    noBtn.style.left=Math.random()*90+"%";
-    noBtn.style.top=Math.random()*90+"%";
-}
-noBtn.onmouseover=moveNo;
-noBtn.onclick=()=>{
-    noMsg.style.display="block";
-    moveNo();
-};
+yesBtn.addEventListener("click", () => {
+    message.innerHTML = "";
+    loveText.style.display = "block";
 
-// YES button — IMMEDIATE celebration
-yesBtn.onclick=()=>{
-    main.style.display="none";
-    celebration.style.display="block";
-
-    // 🔥 Crackers instantly
-    for(let i=0;i<120;i++){
-        const s=document.createElement("div");
-        s.className="spark";
-        s.style.left="50vw";
-        s.style.top="50vh";
-        s.style.setProperty("--x",(Math.random()*600-300)+"px");
-        s.style.setProperty("--y",(Math.random()*600-300)+"px");
-        document.body.appendChild(s);
-        setTimeout(()=>s.remove(),1000);
+    for (let i = 0; i < 40; i++) {
+        createEmoji("❤️");
+        createEmoji("🦋");
+        createEmoji("🎆");
     }
+});
 
-    // 💖 Hearts & 🦋 butterflies instantly
-    setInterval(()=>{
-        const f=document.createElement("div");
-        f.className="float";
-        f.innerHTML=Math.random()>0.5?"💖":"🦋";
-        f.style.left=Math.random()*100+"vw";
-        f.style.fontSize=Math.random()*30+20+"px";
-        document.body.appendChild(f);
-        setTimeout(()=>f.remove(),4500);
-    },150);
-};
+noBtn.addEventListener("click", () => {
+    message.innerHTML = "❌ You cannot choose this option.<br> You must choose YES 😎🔪<br><b>I love youuuuu ❤️</b>";
+});
+
+function createEmoji(symbol) {
+    const emoji = document.createElement("div");
+    emoji.classList.add("heart");
+    emoji.innerText = symbol;
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.top = "100vh";
+    emoji.style.fontSize = Math.random() * 20 + 20 + "px";
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 4000);
+}
 </script>
 
 </body>
