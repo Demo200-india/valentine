@@ -6,63 +6,115 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap');
+
 body{
     margin:0;
     min-height:100vh;
-    background:linear-gradient(135deg,#ff5fa2,#ffb6d5);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Poppins,sans-serif;
+    background:radial-gradient(circle,#ff6fae,#ff1f5a);
+    font-family:'Poppins',sans-serif;
     overflow:hidden;
 }
 
+canvas{
+    position:fixed;
+    inset:0;
+}
+
 .card{
+    position:relative;
+    z-index:2;
+    margin:auto;
+    margin-top:15vh;
+    max-width:520px;
     background:rgba(255,255,255,0.15);
     backdrop-filter:blur(10px);
-    border:10px solid rgba(255,255,255,0.8);
+    border:10px solid rgba(255,255,255,0.9);
     border-radius:30px;
     padding:30px;
-    max-width:500px;
     text-align:center;
     color:white;
-    box-shadow:0 0 40px rgba(255,255,255,0.6);
+    box-shadow:0 0 45px rgba(255,255,255,0.8);
+}
+
+h2{
+    font-family:'Great Vibes',cursive;
+    font-size:42px;
 }
 
 .float{
     position:fixed;
     font-size:28px;
-    animation:floatUp 4s linear forwards;
+    animation:float 4s linear forwards;
 }
-
-@keyframes floatUp{
-    from{transform:translateY(100vh)}
-    to{transform:translateY(-10vh);opacity:0}
+@keyframes float{
+    to{transform:translateY(-120vh);opacity:0}
 }
 </style>
 </head>
 
 <body>
 
+<audio autoplay loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
 <div class="card">
     <h2>Happy Valentine’s Day 💖</h2>
     <p>You are my favorite feeling.</p>
-    <p>You make my days brighter and my heart calmer.</p>
+    <p>You make my heart calm and my world brighter.</p>
     <p>I choose you today and always 💕</p>
     <p>I love youuuuu 😎❤️</p>
 </div>
 
 <script>
+/* FIREWORKS */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth;
+canvas.height=innerHeight;
+
+let particles=[];
+function fire(){
+    for(let i=0;i<80;i++){
+        particles.push({
+            x:innerWidth/2,
+            y:innerHeight/2,
+            vx:(Math.random()-0.5)*8,
+            vy:(Math.random()-0.5)*8,
+            life:80
+        });
+    }
+}
+setInterval(fire,900);
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach((p,i)=>{
+        p.x+=p.vx;
+        p.y+=p.vy;
+        p.life--;
+        ctx.fillStyle="white";
+        ctx.fillRect(p.x,p.y,3,3);
+        if(p.life<=0)particles.splice(i,1);
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+/* floating hearts */
 setInterval(()=>{
     const e=document.createElement("div");
     e.className="float";
     e.innerHTML=Math.random()>0.5?"💖":"🦋";
     e.style.left=Math.random()*100+"vw";
+    e.style.top="100vh";
     document.body.appendChild(e);
     setTimeout(()=>e.remove(),4000);
-},150);
+},180);
 </script>
 
 </body>
 </html>
-
