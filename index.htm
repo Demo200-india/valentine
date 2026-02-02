@@ -2,112 +2,58 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Will You Be My Valentine 💖</title>
+<title>Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500&display=swap');
-
-* {
-    box-sizing: border-box;
+body{
+    margin:0;
+    min-height:100vh;
+    background:url("proposal.jpg") center/cover no-repeat;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Poppins,sans-serif;
+    overflow:hidden;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: 'Poppins', sans-serif;
-    background: url("Picsart_26-02-01_22-01-33-238.jpg") center/cover no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    overflow-x: hidden;
+.container{
+    background:transparent;
+    border:8px double #ff2f68;
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+    max-width:420px;
+    width:100%;
 }
 
-.container {
-    background: transparent;   /* fully transparent */
-    border: 8px double #ff2f68;
-    border-radius: 25px;
-    padding: 25px;
-    max-width: 420px;
-    width: 100%;
-    text-align: center;
-    box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); /* fixed */
-}
-    
+h1{color:#ff1f5a}
 
-h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(32px, 6vw, 42px);
-    color: #ff1f5a;
-    margin-bottom: 15px;
+button{
+    padding:12px 28px;
+    font-size:16px;
+    border:none;
+    border-radius:30px;
+    margin:10px;
+    cursor:pointer;
 }
 
-.buttons {
-    margin-top: 20px;
-    position: relative;
-    height: 80px;
+#yes{background:#ff2f68;color:white}
+#no{background:#ddd}
+
+.spark{
+    position:fixed;
+    width:6px;
+    height:6px;
+    background:white;
+    border-radius:50%;
+    animation:spark 1s ease-out forwards;
 }
 
-button {
-    padding: 12px 28px;
-    font-size: 16px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-}
-
-#yesBtn {
-    background: linear-gradient(45deg,#ff4d6d,#ff9a9e);
-    color: white;
-}
-
-#noBtn {
-    background: #ddd;
-    color: #333;
-    position: absolute;
-    right: 0;
-}
-
-#message {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #ff1f5a;
-}
-
-.love-text {
-    display: none;
-    margin-top: 20px;
-    color: #ff1f5a;
-    font-size: 15px;
-}
-
-.love-text p {
-    margin: 8px 0;
-}
-
-.emoji {
-    position: fixed;
-    font-size: 24px;
-    animation: fly 4s linear forwards;
-    pointer-events: none;
-}
-
-@keyframes fly {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-650px); opacity: 0; }
-}
-
-/* Mobile tweaks */
-@media (max-width: 480px) {
-    .buttons {
-        height: 120px;
-    }
-    #noBtn {
-        top: 50px;
-        right: auto;
-        left: 50%;
-        transform: translateX(-50%);
+@keyframes spark{
+    to{
+        transform:translate(var(--x),var(--y));
+        opacity:0;
     }
 }
 </style>
@@ -115,67 +61,47 @@ button {
 
 <body>
 
-<audio id="music" loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
-</audio>
-
 <div class="container">
-    <h1>Will you be my Valentine? 💍❤️</h1>
-
-    <div class="buttons">
-        <button id="yesBtn">Yes 💖</button>
-        <button id="noBtn">No 😏</button>
-    </div>
-
-    <div id="message"></div>
-
-    <div class="love-text" id="loveText">
-        <p>Happy Valentine’s Day bby ❤️</p>
-        <p>You are the reason my heart smiles every day 🥰</p>
-        <p>Your love is my favorite forever 💕</p>
-        <p>I promise to stand by you always ✨</p>
-        <p>I love youuuuu 😎❤️</p>
-    </div>
+    <h1>Will you be my Valentine? 💖</h1>
+    <button id="yes">Yes 💕</button>
+    <button id="no">No</button>
 </div>
 
 <script>
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
-const msg = document.getElementById("message");
-const loveText = document.getElementById("loveText");
-const music = document.getElementById("music");
+const noBtn=document.getElementById("no");
+const yesBtn=document.getElementById("yes");
 
-yesBtn.onclick = () => {
-    msg.innerHTML = "";
-    loveText.style.display = "block";
-    music.play();
+const noTexts=[
+    "No",
+    "Really?",
+    "Really really?",
+    "Nice try 😏",
+    "Still no? 😈"
+];
+let noIndex=0;
 
-    for (let i = 0; i < 40; i++) {
-        spawn("❤️");
-        spawn("🦋");
-        spawn("🎆");
+noBtn.onclick=()=>{
+    noIndex=(noIndex+1)%noTexts.length;
+    noBtn.innerText=noTexts[noIndex];
+};
+
+// YES → crackers first → redirect
+yesBtn.onclick=()=>{
+    for(let i=0;i<120;i++){
+        const s=document.createElement("div");
+        s.className="spark";
+        s.style.left="50vw";
+        s.style.top="50vh";
+        s.style.setProperty("--x",(Math.random()*600-300)+"px");
+        s.style.setProperty("--y",(Math.random()*600-300)+"px");
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),1000);
     }
-};
 
-noBtn.onclick = () => {
-    msg.innerHTML = "❌ You cannot choose this option.<br>You must choose YES 😎🔪<br>I love youuuuu ❤️";
+    setTimeout(()=>{
+        window.location.href="love.html";
+    },1200);
 };
-
-noBtn.onmouseover = noBtn.ontouchstart = () => {
-    const x = Math.random() * 200 - 100;
-    const y = Math.random() * 100;
-    noBtn.style.transform = `translate(${x}px, ${y}px)`;
-};
-
-function spawn(symbol) {
-    const e = document.createElement("div");
-    e.className = "emoji";
-    e.innerText = symbol;
-    e.style.left = Math.random() * 100 + "vw";
-    e.style.top = "100vh";
-    document.body.appendChild(e);
-    setTimeout(() => e.remove(), 4000);
-}
 </script>
 
 </body>
