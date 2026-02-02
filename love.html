@@ -1,1 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>I Love You 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff5fa2,#ffb6d5);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Poppins,sans-serif;
+    overflow:hidden;
+}
+
+.card{
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border:10px solid rgba(255,255,255,0.8);
+    border-radius:30px;
+    padding:30px;
+    max-width:500px;
+    text-align:center;
+    color:white;
+    box-shadow:0 0 40px rgba(255,255,255,0.6);
+}
+
+.float{
+    position:fixed;
+    font-size:28px;
+    animation:floatUp 4s linear forwards;
+}
+
+@keyframes floatUp{
+    from{transform:translateY(100vh)}
+    to{transform:translateY(-10vh);opacity:0}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Happy Valentine’s Day 💖</h2>
+    <p>You are my favorite feeling.</p>
+    <p>You make my days brighter and my heart calmer.</p>
+    <p>I choose you today and always 💕</p>
+    <p>I love youuuuu 😎❤️</p>
+</div>
+
+<script>
+setInterval(()=>{
+    const e=document.createElement("div");
+    e.className="float";
+    e.innerHTML=Math.random()>0.5?"💖":"🦋";
+    e.style.left=Math.random()*100+"vw";
+    document.body.appendChild(e);
+    setTimeout(()=>e.remove(),4000);
+},150);
+</script>
+
+</body>
+</html>
 
