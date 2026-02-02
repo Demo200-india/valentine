@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💖</title>
+<title>Will You Be My Valentine 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap');
+
 body{
     margin:0;
     min-height:100vh;
@@ -13,24 +15,31 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-family:Poppins,sans-serif;
+    font-family:'Poppins',sans-serif;
     overflow:hidden;
 }
 
+/* semi-white glass background */
 .container{
-    background:transparent;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(6px);
     border:8px double #ff2f68;
     border-radius:25px;
-    padding:25px;
-    text-align:center;
+    padding:30px;
     max-width:420px;
     width:100%;
+    text-align:center;
+    box-shadow:0 0 35px rgba(255,0,80,0.5);
 }
 
-h1{color:#ff1f5a}
+h1{
+    font-family:'Great Vibes',cursive;
+    font-size:42px;
+    color:#ff1f5a;
+}
 
 button{
-    padding:12px 28px;
+    padding:12px 30px;
     font-size:16px;
     border:none;
     border-radius:30px;
@@ -39,8 +48,11 @@ button{
 }
 
 #yes{background:#ff2f68;color:white}
-#no{background:#ddd}
+#no{background:#ddd;position:absolute}
 
+.buttons{position:relative;height:90px}
+
+/* crackers */
 .spark{
     position:fixed;
     width:6px;
@@ -49,12 +61,8 @@ button{
     border-radius:50%;
     animation:spark 1s ease-out forwards;
 }
-
 @keyframes spark{
-    to{
-        transform:translate(var(--x),var(--y));
-        opacity:0;
-    }
+    to{transform:translate(var(--x),var(--y));opacity:0}
 }
 </style>
 </head>
@@ -63,37 +71,39 @@ button{
 
 <div class="container">
     <h1>Will you be my Valentine? 💖</h1>
-    <button id="yes">Yes 💕</button>
-    <button id="no">No</button>
+
+    <div class="buttons">
+        <button id="yes">Yes 💕</button>
+        <button id="no">No</button>
+    </div>
 </div>
 
 <script>
 const noBtn=document.getElementById("no");
 const yesBtn=document.getElementById("yes");
 
-const noTexts=[
-    "No",
-    "Really?",
-    "Really really?",
-    "Nice try 😏",
-    "Still no? 😈"
-];
-let noIndex=0;
+const noTexts=["No","Really?","Really really?","Nice try 😏","Still no? 😈"];
+let i=0;
 
-noBtn.onclick=()=>{
-    noIndex=(noIndex+1)%noTexts.length;
-    noBtn.innerText=noTexts[noIndex];
+// NO: text + escape
+noBtn.onclick=noBtn.onmouseover=noBtn.ontouchstart=()=>{
+    i=(i+1)%noTexts.length;
+    noBtn.innerText=noTexts[i];
+
+    const x=Math.random()*200-100;
+    const y=Math.random()*120;
+    noBtn.style.transform=`translate(${x}px,${y}px)`;
 };
 
-// YES → crackers first → redirect
+// YES: crackers then redirect
 yesBtn.onclick=()=>{
-    for(let i=0;i<120;i++){
+    for(let i=0;i<140;i++){
         const s=document.createElement("div");
         s.className="spark";
         s.style.left="50vw";
         s.style.top="50vh";
-        s.style.setProperty("--x",(Math.random()*600-300)+"px");
-        s.style.setProperty("--y",(Math.random()*600-300)+"px");
+        s.style.setProperty("--x",(Math.random()*700-350)+"px");
+        s.style.setProperty("--y",(Math.random()*700-350)+"px");
         document.body.appendChild(s);
         setTimeout(()=>s.remove(),1000);
     }
