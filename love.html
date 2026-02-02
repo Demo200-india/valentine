@@ -57,6 +57,7 @@ h2{
 
 <audio id="bgMusic" loop>
     <source src="ReelAudio-40834.mp3" type="audio/mp3">
+    Your browser does not support audio.
 </audio>
 
 <canvas id="fireworks"></canvas>
@@ -117,12 +118,23 @@ setInterval(()=>{
 },180);
 </script>
 <script>
-const music = document.getElementById("bgMusic");
+window.addEventListener("load", () => {
+    const music = document.getElementById("bgMusic");
 
-document.body.addEventListener("click", () => {
-    music.play().catch(() => {});
-}, { once: true });
+    // Try autoplay (works on desktop)
+    music.play().catch(() => {
+        // Fallback for mobile: play on first touch
+        document.addEventListener("touchstart", () => {
+            music.play();
+        }, { once: true });
+
+        document.addEventListener("click", () => {
+            music.play();
+        }, { once: true });
+    });
+});
 </script>
+    
 
 </body>
 </html>
